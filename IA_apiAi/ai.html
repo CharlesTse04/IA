@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圖片上傳</title>
+</head>
+<body>
+    <h1>上傳圖片進行預測</h1>
+    <form id="upload-form" action="http://192.168.0.141:5001/api/add" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*" required>
+        <button type="submit">上傳</button>
+    </form>
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('upload-form').onsubmit = async function(event) {
+            event.preventDefault(); // 防止表單默認提交
+
+            let formData = new FormData(this);
+            let response = await fetch('http://192.168.0.141:5001/api/add', {
+                method: 'POST',
+                body: formData
+            });
+            console.log(result); 
+            if (!response.ok) {
+                let error = await response.json();
+                document.getElementById('result').innerText = `錯誤: ${error.error}`;
+            } else {
+                let result = await response.json();
+                document.getElementById('result').innerText = `${result.predicted_class}`;
+            }
+        };
+    </script>
+</body>
+</html>
