@@ -4,7 +4,7 @@ import { View, Text } from 'react-native';
 const AiSreach = () => {
   return (
     <View >
-      <Text>HiHi你個頭</Text>
+      <Text></Text>
     </View>
   );
 };
